@@ -1,13 +1,17 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "homepage": "./",
+  "main": "public/main.js",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "prettier --write ."
+    "preelectron-pack": "npm run build",
+    "electron-pack": "electron-builder -c.extraMetadata.main=build/main.js",
+    "electron-dev": "concurrently \"SET BROWSER=none&&npm start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "proxy": "http://localhost:8080",
   "dependencies": {
@@ -19,6 +23,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "dayjs": "^1.11.4",
+    "electron-is-dev": "^2.0.0",
     "highcharts": "^10.2.0",
     "highcharts-react-official": "^3.1.0",
     "localforage": "^1.10.0",
@@ -30,6 +35,10 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@electron/remote": "2.0.9",
+    "electron": "^23.2.0",
+    "electron-builder": "^22.7.0",
+    "nodemon": "^2.0.2",
     "prettier": "^2.7.1"
   },
   "eslintConfig": {
